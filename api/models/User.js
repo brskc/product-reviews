@@ -50,18 +50,25 @@ module.exports.getUserByEmail = function (email, callback) {
   User.findOne(query, callback);
 };
 
-module.exports.addUser = (user, callback) => {
+const generatePassword = function(user,callback){
   bcrypt.genSalt(10, (err, salt) => {
     if (err) callback(err, null);
     bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) callback(err, null);
+      if (err) return err;
       user.password = hash;
-      const newUser = new User(user);
-      newUser.save();
-      callback(newUser);
+      callback(user)
     });
   });
+};
 
+module.exports.saveUser = (user, callback) => {
+  generatePassword(user, (data) => {
+    let options = {
+      setDefaultsOnInsert: true
+    };
+    const newUser = new User(data);
+    newUser.save(options, callback);
+  });
 };
 
 module.exports.comparePassword = function (user, candidatePassword, hash, callback) {

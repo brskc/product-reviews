@@ -9,11 +9,13 @@ controller.addProduct = (req, res) => {
   params.name =name;
   params.category = category;
   params.image = image;
+  params.user_id = req.user.id;
   params.price = price;
   params.comment = comment;
 
   Product.saveProduct(params, (data, err) => {
-    if (err){
+    console.log(err);
+    if (data){
       config.logger.log('error', 'Product save is failed !!');
       return res.json({
         status: false,

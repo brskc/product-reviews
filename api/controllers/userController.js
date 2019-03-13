@@ -5,28 +5,48 @@ const controller = require('./baseController');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-controller.addUser = (req, res) => {
-  const params = {};
-  const {username, email, password} = req.body;
-  params.username = username;
-  params.email = email;
-  params.password = password;
+controller.addUser = function (req, res) {
+  config.logger.log('info', 'Add user requested.');
 
-  User.addUser(params, (user, err) => {
-    if (err){
-      config.logger.log('error', 'User save is failed !!');
-      return res.json({
-        err: err,
-        status: false,
-        msg: 'User save is failed !!'
+  let newUser = new User(req.body);
+  newUser.createdAt = new Date();
+  let email = req.body.email;
+  User.getUserByEmail(email, (err, user) => {
+    if (user) {
+      res.json({
+        success: false,
+        msg: 'A user with this email address already exists',
+        username: user.username
       });
+    } else {
+      User.saveUser(newUser, (err, user) => {
+        if (err) {
+          config.winston.logger.log('error', 'Saving user failed! Error:' + err.message);
+          res.json({
+            success: false,
+            msg: "failed",
+            error: err
+          });
+        } else {
+          let userPayload = {
+            _id: user._id,
+            lastLoggedOutAt: null
+          };
+          const token = jwt.sign(userPayload, config.jwt.secret, {
+            expiresIn: 604800 // 1 week
+          });
+          config.logger.log('info', 'New user added. Username:' + user.username);
+
+          res.json({
+            success: true,
+            token: 'Bearer ' + token,
+            user: user
+          });
+        }
+      });
+
     }
-    res.json({
-      status: true,
-      msg: 'user is saved',
-      username: user.username,
-      email: user.email
-    });
+
   });
 
 };
