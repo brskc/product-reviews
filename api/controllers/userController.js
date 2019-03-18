@@ -4,6 +4,7 @@ const config = require('../../config');
 const controller = require('./baseController');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 controller.addUser = function (req, res) {
   config.logger.log('info', 'Add user requested.');
@@ -39,16 +40,13 @@ controller.addUser = function (req, res) {
 
           res.json({
             success: true,
-            token: 'Bearer ' + token,
+            token: token,
             user: user
           });
         }
       });
-
     }
-
   });
-
 };
 
 controller.getUsers = (req,res) => {
@@ -56,6 +54,34 @@ controller.getUsers = (req,res) => {
     res.json(users);
   })
 };
+
+controller.updateUser = function (req, res) {
+  config.logger.log('info', 'Update user requested.');
+  let user = req.decode;
+  let userUpdated = req.body;
+  User.updateUser(user._id, userUpdated, (err, userSaved) => {
+    if (err) {
+      config.logger.log('error', 'User update failed! error:' + err.message);
+      return res.json({
+        success: false,
+        msg: err
+      });
+    }
+    if (userSaved == null) {
+      return res.json({
+        success: false,
+        msg: 'user not found'
+      });
+    }
+    config.logger.log('info', 'User updated successfully.');
+    return res.json({
+      success: true,
+      msg: 'User updated successfully!',
+      user: userSaved
+    });
+  });
+};
+
 
 controller.authenticateUser = function (req, res) {
   config.logger.log('info', 'user authentication request received');
@@ -97,7 +123,7 @@ controller.authenticateUser = function (req, res) {
 
         res.json({
           success: true,
-          token: 'Bearer ' + token,
+          token: token,
           user: user
         });
       } else {

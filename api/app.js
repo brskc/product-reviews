@@ -15,9 +15,6 @@ mongoose.connect(config.mongodb.uri + config.mongodb.db.name, {
 });
 
 app.set('api_secret_key', config.jwt.secret);
-const verifyToken = require('./middlewares/verify-token');
-
-app.use('/api', verifyToken);
 
 app.use(bodyParser.urlencoded({extended: true, limit: '50mb', parameterLimit: 1000000}));
 app.use(bodyParser.json({limit: '50mb'}));
