@@ -2,20 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 let userController = require('../controllers/userController');
-let productController = require('../controllers/productController');
-let categoryController = require('../controllers/categoryController');
+let commentController = require('../controllers/commentController');
+let headerController = require('../controllers/headerController');
 
 // API PRIVATE
-router.use('/api/user', require('./userRoutes'));
-router.use('/api/product', require('./productRoutes'));
-router.use('/api/category', require('./categoryRoutes'));
+router.use('/api/v1/user', require('./userRoutes'));
+router.use('/api/v1/comment', require('./commentRoutes'));
+router.use('/api/v1/header', require('./headerRoutes'));
 
 // PUBLIC
-router.get('/', productController.getAllProduct);
-router.get('/category', categoryController.getAllCategory);
+router.get('/comment', commentController.getAllComment);
+router.get('/header', headerController.getAllHeader);
 router.post('/signup', userController.addUser);
 router.post('/login', userController.authenticateUser);
-router.get('/between/:start_year/:end_year', productController.between);
 
 
 module.exports = router;
