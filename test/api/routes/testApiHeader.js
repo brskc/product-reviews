@@ -20,6 +20,45 @@ describe('API ROUTES /header', () => {
     });
   });
 
+  it('/api/v1/header/add | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/header/add')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done()
+      })
+  });
+
+  it('/api/v1/header/update | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/header/update')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done();
+      })
+  });
+
+  it('/api/v1/header/delete | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/header/update')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done();
+      })
+  });
+
   it('/header | should show all header', (done) => {
     request
       .get('/header')

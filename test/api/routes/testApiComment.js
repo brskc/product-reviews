@@ -35,6 +35,45 @@ describe('API ROUTES /comment', () => {
       });
   });
 
+  it('/api/v1/comment/add | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/comment/add')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done()
+      })
+  });
+
+  it('/api/v1/comment/update | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/comment/update')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done();
+      })
+  });
+
+  it('/api/v1/comment/delete | should not allow to access to when not logged in', (done) => {
+    request
+      .post('/api/v1/comment/delete')
+      .expect(200)
+      .end((err,res) => {
+        if (err) return done(err);
+        res.body.should.property('success');
+        expect(res.body.success).to.equal(false);
+        res.body.should.property('msg');
+        done();
+      })
+  });
+
   it('/api/v1/comment/add | should add comment', (done) => {
     const comment = {
       header_id: "5c8fb97a2866893b1db84533",
@@ -77,12 +116,11 @@ describe('API ROUTES /comment', () => {
 
   it('/api/v1/comment/delete | should delete comment', (done) => {
     const comment = {
-      id: "5c8fb97a2866893b1db84533",
-      comment: "test-update-comment"
+      id: "5c8fb97a2866893b1db84533"
     };
 
     request
-      .post('/api/v1/comment/update')
+      .post('/api/v1/comment/delete')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(comment)
