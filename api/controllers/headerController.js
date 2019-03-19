@@ -66,16 +66,18 @@ controller.deleteHeader = (req, res) => {
 };
 
 controller.getAllHeader = (req, res) => {
-  Header.findAllHeader((err, headers) => {
-    if (err) return res.json({
-      success: false,
-      err: err
-    });
-
-    res.json({
-      success: true,
-      headers: headers
-    })
+  Header.findAllHeader((headers,err) => {
+    if (err){
+      return res.json({
+        success: false,
+        err: err
+      })
+    } else {
+      res.json({
+        success: true,
+        headers: headers
+      })
+    }
   })
 };
 

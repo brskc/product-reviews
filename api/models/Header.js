@@ -45,5 +45,48 @@ module.exports.deleteHeader = (id, callback) => {
 };
 
 module.exports.findAllHeader = (callback) => {
-  Header.find({}, callback);
+  const promise = Header.aggregate([
+    {
+      $lookup: {
+        from: 'comments',
+        localField: "_id",
+        foreignField: 'header_id',
+        as: 'comments'
+      }
+    },
+    {
+      $unwind: {
+        path: '$comments',
+        preserveNullAndEmptyArrays: true
+      }
+    },
+    {
+      $group: {
+        _id: {
+          _id: '$_id',
+          category: '$category',
+          name: '$name',
+          createdAt: '$createdAt'
+        },
+        comments: {
+          $push: '$comments'
+        }
+      }
+    },
+    {
+      $project: {
+        _id: '$_id._id',
+        category: '$_id.category',
+        name: '$_id.name',
+        createdAt: '$_id.createdAt',
+        comments: '$comments'
+      }
+    }
+  ]);
+
+  promise.then(data => {
+    callback(data)
+  }).catch(err => {
+    callback(err)
+  })
 };

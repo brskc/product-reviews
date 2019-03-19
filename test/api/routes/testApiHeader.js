@@ -48,7 +48,7 @@ describe('API ROUTES /header', () => {
 
   it('/api/v1/header/delete | should not allow to access to when not logged in', (done) => {
     request
-      .post('/api/v1/header/update')
+      .post('/api/v1/header/delete')
       .expect(200)
       .end((err,res) => {
         if (err) return done(err);
@@ -116,8 +116,7 @@ describe('API ROUTES /header', () => {
 
   it('/api/v1/header/delete | should delete header', (done) => {
     const header = {
-      id: "5c8fb97a2866893b1db84533",
-      comment: "test-update-header"
+      id: "5c8fb97a2866893b1db84533"
     };
 
     request
