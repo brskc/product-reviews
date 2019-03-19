@@ -14,7 +14,10 @@ controller.addComment = (req, res) => {
       success: false,
       err: err
     });
-    res.json(comment);
+    res.json({
+      success: true,
+      comment: comment
+    });
   })
 };
 

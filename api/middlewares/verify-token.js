@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports.auth = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.body.token || req.query.token;
-  console.log(token);
 
   if (token){
     jwt.verify(token, req.app.get('api_secret_key'), (err, decoded) => {

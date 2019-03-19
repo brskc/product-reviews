@@ -14,7 +14,10 @@ controller.addHeader = (req,res) => {
       success: false,
       err: err
     });
-    res.json(header);
+    res.json({
+      success:true,
+      header:header
+    });
   })
 };
 
@@ -42,7 +45,6 @@ controller.updateHeader = (req, res) => {
 
 controller.deleteHeader = (req, res) => {
   let id = req.body.id;
-  console.log(id);
   Header.deleteHeader(id, (err, header) => {
 
     if (err) return res.json({

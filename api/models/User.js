@@ -27,9 +27,7 @@ const User = module.exports = mongoose.model('user', UserSchema);
 
 module.exports.updateUser = function (userId, userUpdated, callback) {
   userUpdated.updatedAt = new Date();
-  console.log(userId);
   User.findOneAndUpdate({'_id': userId}, userUpdated,{new:true}, callback);
-
 };
 
 module.exports.getUserById = function (id, callback) {
