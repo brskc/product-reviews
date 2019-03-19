@@ -24,7 +24,7 @@ describe('API ROUTES /header', () => {
     request
       .post('/api/v1/header/add')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -37,7 +37,7 @@ describe('API ROUTES /header', () => {
     request
       .post('/api/v1/header/update')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -50,7 +50,7 @@ describe('API ROUTES /header', () => {
     request
       .post('/api/v1/header/delete')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -79,14 +79,13 @@ describe('API ROUTES /header', () => {
       name: "test-header-name",
       category: "test-category"
     };
-
     request
       .post('/api/v1/header/add')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(header)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.be.a('object');
         res.body.should.property('success');
@@ -101,14 +100,13 @@ describe('API ROUTES /header', () => {
       id: "5c8fb97a2866893b1db84533",
       comment: "test-update-header"
     };
-
     request
       .post('/api/v1/header/update')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(header)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         done();
       })
@@ -118,17 +116,15 @@ describe('API ROUTES /header', () => {
     const header = {
       id: "5c8fb97a2866893b1db84533"
     };
-
     request
       .post('/api/v1/header/update')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(header)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         done();
       })
   });
-
 });

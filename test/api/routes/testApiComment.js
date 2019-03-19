@@ -1,3 +1,5 @@
+'use strict';
+
 const should = require('chai').should();
 const expect = require('chai').expect;
 const app = require('../../../api/app');
@@ -6,19 +8,19 @@ const baseRoutes = require('./apiBaseRoutes');
 
 describe('API ROUTES /comment', () => {
 
-    let token;
-    before(function (done) {
-      baseRoutes.loginUser(request, {
-        email: 'test.user@test.com',
-        password: '123456789',
-      }, function (error, authToken) {
-        if (error) {
-          throw error;
-        }
-        token = authToken;
-        done();
-      });
+  let token;
+  before(function (done) {
+    baseRoutes.loginUser(request, {
+      email: 'test.user@test.com',
+      password: '123456789',
+    }, function (error, authToken) {
+      if (error) {
+        throw error;
+      }
+      token = authToken;
+      done();
     });
+  });
 
   it('/comment | should show all comment', (done) => {
     request
@@ -39,7 +41,7 @@ describe('API ROUTES /comment', () => {
     request
       .post('/api/v1/comment/add')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -52,7 +54,7 @@ describe('API ROUTES /comment', () => {
     request
       .post('/api/v1/comment/update')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -65,7 +67,7 @@ describe('API ROUTES /comment', () => {
     request
       .post('/api/v1/comment/delete')
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.property('success');
         expect(res.body.success).to.equal(false);
@@ -79,14 +81,13 @@ describe('API ROUTES /comment', () => {
       header_id: "5c8fb97a2866893b1db84533",
       comment: "test-comment"
     };
-
     request
       .post('/api/v1/comment/add')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(comment)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         res.body.should.be.a('object');
         res.body.should.property('success');
@@ -101,14 +102,13 @@ describe('API ROUTES /comment', () => {
       id: "5c8fb97a2866893b1db84533",
       comment: "test-update-comment"
     };
-
     request
       .post('/api/v1/comment/update')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(comment)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         done();
       })
@@ -118,17 +118,15 @@ describe('API ROUTES /comment', () => {
     const comment = {
       id: "5c8fb97a2866893b1db84533"
     };
-
     request
       .post('/api/v1/comment/delete')
       .set('x-access-token', token)
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .send(comment)
       .expect(200)
-      .end((err,res) => {
+      .end((err, res) => {
         if (err) return done(err);
         done();
       })
   });
-
 });

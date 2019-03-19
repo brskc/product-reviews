@@ -2,7 +2,6 @@
 
 const superagent = require('superagent');
 const agent = superagent.agent();
-
 const authenticationRoute = '/login';
 
 exports.loginUser = function (request, credentials, done) {
@@ -13,7 +12,7 @@ exports.loginUser = function (request, credentials, done) {
       if (err) {
         done(err);
       }
-      if(!res.body.hasOwnProperty('token')){
+      if (!res.body.hasOwnProperty('token')) {
         done(new Error('User could not log in!'))
       }
       done(null, res.body.token);

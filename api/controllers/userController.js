@@ -8,7 +8,6 @@ const _ = require('lodash');
 
 controller.addUser = function (req, res) {
   config.logger.log('info', 'Add user requested.');
-
   let newUser = new User(req.body);
   newUser.createdAt = new Date();
   let email = req.body.email;
@@ -37,7 +36,6 @@ controller.addUser = function (req, res) {
             expiresIn: 604800 // 1 week
           });
           config.logger.log('info', 'New user added. Username:' + user.username);
-
           res.json({
             success: true,
             token: token,
@@ -49,7 +47,7 @@ controller.addUser = function (req, res) {
   });
 };
 
-controller.getUsers = (req,res) => {
+controller.getUsers = (req, res) => {
   User.findUsers((users) => {
     res.json(users);
   })
@@ -99,7 +97,6 @@ controller.authenticateUser = function (req, res) {
       });
       return;
     }
-
     if (!user) {
       res.json({success: false, msg: 'User not found'});
       return;
@@ -116,11 +113,9 @@ controller.authenticateUser = function (req, res) {
           userPayload['lastLoggedOutAt'] = user.lastLoggedOutAt;
         } else
           userPayload['lastLoggedOutAt'] = null;
-
         const token = jwt.sign(userPayload, config.jwt.secret, {
           expiresIn: 604800 // 1 week
         });
-
         res.json({
           success: true,
           token: token,

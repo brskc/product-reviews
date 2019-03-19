@@ -4,7 +4,7 @@ const app = require('../../../api/app');
 const request = require('supertest')(app);
 const baseRoutes = require('./apiBaseRoutes');
 
-describe('API ROUTES /header', () => {
+describe('API ROUTES /user', () => {
 
   let token;
   before(function (done) {
@@ -99,7 +99,4 @@ describe('API ROUTES /header', () => {
         done();
       });
   });
-
-
-
 });

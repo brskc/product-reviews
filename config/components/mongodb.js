@@ -5,8 +5,7 @@ const envVarsSchema = joi.object({
   MONGODB_DB_NAME: joi.string().required(),
 }).unknown().required();
 
-const {error, value: envVars} = joi.validate(process.env, envVarsSchema);
-
+const {error, value: envVars} = joi.validate(process.env, envVarsSchema)
 if (error) {
   throw new Error(`Config validation error: ${error.message}`)
 }

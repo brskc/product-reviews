@@ -25,7 +25,6 @@ controller.updateComment = (req, res) => {
   let params = req.body;
   let id = req.body.id;
   Comment.updateComment(id, params, (err, newComment) => {
-
     if (err) return res.json({
       success: false,
       err: err
@@ -39,7 +38,6 @@ controller.updateComment = (req, res) => {
         msg: 'comment is update!!',
         newComment: newComment
       });
-
     }
   });
 };
@@ -47,7 +45,6 @@ controller.updateComment = (req, res) => {
 controller.deleteComment = (req, res) => {
   let id = req.body.id;
   Comment.deleteComment(id, (err, comment) => {
-
     if (err) return res.json({
       success: false,
       err: err
@@ -61,11 +58,10 @@ controller.deleteComment = (req, res) => {
         msg: 'comment is deleted!!'
       });
     }
-
   });
 };
 
-controller.getAllComment = (req,res) => {
+controller.getAllComment = (req, res) => {
   Comment.findAllComment((err, comments) => {
     if (err) return res.json({
       success: false,
@@ -76,7 +72,7 @@ controller.getAllComment = (req,res) => {
         comments: comments
       });
     }
-  })
+  });
 };
 
 module.exports = controller;

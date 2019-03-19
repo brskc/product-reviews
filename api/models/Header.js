@@ -12,8 +12,6 @@ let category = {
   basketbool: categoryBasketbool
 };
 
-
-
 const HeaderSchema = new Schema({
   category: [category.order, category.futbool, category.basketbool],
   name: {
@@ -32,16 +30,16 @@ module.exports.saveHeader = (params, callback) => {
     setDefaultsOnInsert: true
   };
   const header = new Header(params);
-  header.save(options,callback);
+  header.save(options, callback);
 
 };
 
-module.exports.updateHeader = (id,params, callback) => {
-  Header.findOneAndUpdate({_id:id}, params, {new: true}, callback)
+module.exports.updateHeader = (id, params, callback) => {
+  Header.findOneAndUpdate({_id: id}, params, {new: true}, callback)
 };
 
 module.exports.deleteHeader = (id, callback) => {
-  Header.findOneAndDelete({_id:id}, callback);
+  Header.findOneAndDelete({_id: id}, callback);
 };
 
 module.exports.findAllHeader = (callback) => {
@@ -88,5 +86,5 @@ module.exports.findAllHeader = (callback) => {
     callback(data)
   }).catch(err => {
     callback(err)
-  })
+  });
 };

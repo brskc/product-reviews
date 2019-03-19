@@ -4,12 +4,11 @@
  * Get validator
  */
 const joi = require('joi');
-
 const envVarsSchema = joi.object({
   JWT_SECRET: joi.string().required()
 }).unknown().required();
 
-const { error, value: envVars } = joi.validate(process.env, envVarsSchema);
+const {error, value: envVars} = joi.validate(process.env, envVarsSchema);
 if (error) {
   throw new Error(`Config validation error: ${error.message}`)
 }

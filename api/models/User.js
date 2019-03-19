@@ -27,7 +27,7 @@ const User = module.exports = mongoose.model('user', UserSchema);
 
 module.exports.updateUser = function (userId, userUpdated, callback) {
   userUpdated.updatedAt = new Date();
-  User.findOneAndUpdate({'_id': userId}, userUpdated,{new:true}, callback);
+  User.findOneAndUpdate({'_id': userId}, userUpdated, {new: true}, callback);
 };
 
 module.exports.getUserById = function (id, callback) {
@@ -35,7 +35,6 @@ module.exports.getUserById = function (id, callback) {
 };
 
 module.exports.findUsers = (callback) => {
-
   const promise = User.find();
   promise.then((users) => {
     callback(users)
@@ -50,7 +49,7 @@ module.exports.getUserByEmail = function (email, callback) {
   User.findOne(query, callback);
 };
 
-const generatePassword = function(user,callback){
+const generatePassword = function (user, callback) {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) callback(err, null);
     bcrypt.hash(user.password, salt, (err, hash) => {
@@ -93,5 +92,4 @@ module.exports.comparePassword = function (user, candidatePassword, hash, callba
     } else
       callback(null, isMatch);
   });
-
 };
