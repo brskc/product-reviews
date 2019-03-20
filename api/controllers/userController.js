@@ -5,12 +5,15 @@ const controller = require('./baseController');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
+const Email = require('email-templates');
+const mailService = require('../services/mailServices');
 
 controller.addUser = function (req, res) {
   config.logger.log('info', 'Add user requested.');
   let newUser = new User(req.body);
   newUser.createdAt = new Date();
   let email = req.body.email;
+  let username = req.body.username;
   User.getUserByEmail(email, (err, user) => {
     if (user) {
       res.json({
@@ -35,6 +38,23 @@ controller.addUser = function (req, res) {
           const token = jwt.sign(userPayload, config.jwt.secret, {
             expiresIn: 604800 // 1 week
           });
+          const mail = new Email({
+            message: {
+              from: `Urun<${config.mail.recoveryEmailName}>`,
+            },
+            send: true,
+            transport: mailService.transporter(config.mail.recoveryEmailName,config.mail.recoveryEmailSecurity)
+          });
+          mail.send({
+            template: 'welcome',
+            message: {
+              to: email,
+            },
+            locals: {
+              username: username
+            }
+          });
+
           config.logger.log('info', 'New user added. Username:' + user.username);
           res.json({
             success: true,
