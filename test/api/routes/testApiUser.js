@@ -27,7 +27,7 @@ describe('API ROUTES /api/v1/user', () => {
       password: 'test-password'
     };
     request
-      .post('/api/v1/signup')
+      .post('/api/v1/user/signup')
       .expect(200)
       .send(user)
       .end((err, res) => {
