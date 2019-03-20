@@ -12,14 +12,14 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mongo:3.4
 
-    working_directory: ~/vivoo-api
-
+    working_directory: ~/Product-api
     steps:
       - checkout
 
       - run: cp .env.dist .env
 
       - run: sudo apt-get update
+      - run: sudo apt-get i mongodb
 
       # Download and cache dependencies
       - restore_cache:
