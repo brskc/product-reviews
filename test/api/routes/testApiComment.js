@@ -6,7 +6,7 @@ const app = require('../../../api/app');
 const request = require('supertest')(app);
 const baseRoutes = require('./apiBaseRoutes');
 
-describe('API ROUTES /comment', () => {
+describe('API ROUTES /api/v1/comment', () => {
 
   let token;
   before(function (done) {
@@ -22,9 +22,9 @@ describe('API ROUTES /comment', () => {
     });
   });
 
-  it('/comment | should show all comment', (done) => {
+  it('/api/v1/comment | should show all comment', (done) => {
     request
-      .get('/comment')
+      .get('/api/v1/comment')
       .expect(200)
       .end((err, res) => {
         if (err) {

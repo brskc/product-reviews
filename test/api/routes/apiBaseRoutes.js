@@ -2,7 +2,7 @@
 
 const superagent = require('superagent');
 const agent = superagent.agent();
-const authenticationRoute = '/login';
+const authenticationRoute = '/api/v1/login';
 
 exports.loginUser = function (request, credentials, done) {
   request

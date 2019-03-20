@@ -4,7 +4,7 @@ const app = require('../../../api/app');
 const request = require('supertest')(app);
 const baseRoutes = require('./apiBaseRoutes');
 
-describe('API ROUTES /header', () => {
+describe('API ROUTES /api/v1/header', () => {
 
   let token;
   before(function (done) {
@@ -59,9 +59,9 @@ describe('API ROUTES /header', () => {
       })
   });
 
-  it('/header | should show all header', (done) => {
+  it('/api/v1/header | should show all header', (done) => {
     request
-      .get('/header')
+      .get('/api/v1/header')
       .expect(200)
       .end((err, res) => {
         if (err) {

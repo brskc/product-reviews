@@ -4,7 +4,7 @@ const app = require('../../../api/app');
 const request = require('supertest')(app);
 const baseRoutes = require('./apiBaseRoutes');
 
-describe('API ROUTES /user', () => {
+describe('API ROUTES /api/v1/user', () => {
 
   let token;
   before(function (done) {
@@ -20,14 +20,14 @@ describe('API ROUTES /user', () => {
     });
   });
 
-  it('/signup | should add new user', (done) => {
+  it('/api/v1/signup | should add new user', (done) => {
     const user = {
       username: 'test-user-name',
       email: 'test-email@test.me',
       password: 'test-password'
     };
     request
-      .post('/signup')
+      .post('/api/v1/signup')
       .expect(200)
       .send(user)
       .end((err, res) => {
@@ -43,13 +43,13 @@ describe('API ROUTES /user', () => {
       });
   });
 
-  it('/login | should login user', (done) => {
+  it('/api/v1/login | should login user', (done) => {
     const user = {
       email: 'test-email@test.me',
       password: 'test-password'
     };
     request
-      .post('/login')
+      .post('/api/v1/login')
       .expect(200)
       .send(user)
       .end((err, res) => {
