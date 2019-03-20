@@ -19,7 +19,7 @@ jobs:
       - run: cp .env.dist .env
 
       - run: sudo apt-get update
-      - run: sudo apt-get i mongodb
+      - run: sudo apt-get install mongodb
 
       # Download and cache dependencies
       - restore_cache:
