@@ -20,7 +20,7 @@ describe('API ROUTES /api/v1/user', () => {
     });
   });
 
-  it('/api/v1/signup | should add new user', (done) => {
+  it('/api/v1/user/signup | should add new user', (done) => {
     const user = {
       username: 'test-user-name',
       email: 'test-email@test.me',
@@ -43,7 +43,7 @@ describe('API ROUTES /api/v1/user', () => {
       });
   });
 
-  it('/api/v1/login | should login user', (done) => {
+  it('/api/v1/user/login | should login user', (done) => {
     const user = {
       email: 'test-email@test.me',
       password: 'test-password'
