@@ -19,7 +19,7 @@ jobs:
       - run: cp .env.dist .env
       - run: sudo apt-get update
       - run: sudo apt-get install mongodb
-      - run: sudo apt-get install -y mongodb-org-tools
+      - run: sudo apt-get install mongodb-org-tools
       - run: for i in test/db/*.json; do file=$(basename $i); mongoimport --db product_db --collection ${file%.*} --file $i --jsonArray; done
 
 
