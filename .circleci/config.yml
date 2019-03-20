@@ -21,8 +21,6 @@ jobs:
 
       - run: sudo apt-get update
 
-      - run: sudo apt-get install -y mongodb-org-tools
-
       # Download and cache dependencies
       - restore_cache:
           keys:
