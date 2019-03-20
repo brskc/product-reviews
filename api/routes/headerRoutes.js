@@ -8,5 +8,6 @@ const auth = require('../middlewares/verify-token');
 router.post('/add', auth.auth, headerController.addHeader);
 router.post('/update', auth.auth, headerController.updateHeader);
 router.post('/delete', auth.auth, headerController.deleteHeader);
+router.get('/', headerController.getAllHeader);
 
 module.exports = router;

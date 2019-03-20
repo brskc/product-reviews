@@ -12,11 +12,9 @@ router.use('/api/v1/user', require('./userRoutes'));
 router.use('/api/v1/comment', require('./commentRoutes'));
 router.use('/api/v1/header', require('./headerRoutes'));
 
-// PUBLIC
-router.get('/comment', commentController.getAllComment);
-router.get('/header', headerController.getAllHeader);
-router.post('/signup', userController.addUser);
-router.post('/login', userController.authenticateUser);
+
+
+
 
 
 module.exports = router;
