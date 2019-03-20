@@ -1,1 +1,1 @@
-{"_id" : { "$oid" : "5c92249c1719e70d1b656227" }, "username" : "test-username", "email" : "test@email.com", "password" : "$2a$10$vt9ExJ2Zjcm/nE5c1ZSwUe0KEsT0hvVzW1t3qHFAFj5M9lm064OTW", "createdAt" : { "$date" : "2019-03-20T11:31:40.244Z" }, "__v" : 0}
+{"_id" : { "$oid" : "5c92249c1719e70d1b656227" }, "username" : "test-username", "email" : "test@email.com", "password" : "$2b$10$f8I7vx1bf/k80oN5Soe9g.Y7ZN0PNihH2A7CTNajKXDj2Y5R0aLdi", "createdAt" : { "$date" : "2019-03-20T11:31:40.244Z" }, "__v" : 0}
