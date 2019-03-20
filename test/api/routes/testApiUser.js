@@ -9,7 +9,7 @@ describe('API ROUTES /api/v1/user', () => {
   let token;
   before(function (done) {
     baseRoutes.loginUser(request, {
-      email: 'test.user@test.com',
+      email: 'test@email.com',
       password: '123456789',
     }, function (error, authToken) {
       if (error) {
