@@ -49,7 +49,7 @@ describe('API ROUTES /api/v1/user', () => {
       password: 'test-password'
     };
     request
-      .post('/api/v1/login')
+      .post('/api/v1/user/login')
       .expect(200)
       .send(user)
       .end((err, res) => {
