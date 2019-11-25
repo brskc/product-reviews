@@ -31,7 +31,7 @@
     "joi": "^13.7.0",
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.13",
-    "mongoose": "^5.3.10",
+    "mongoose": "^5.7.5",
     "mongoose-delete": "^0.4.0",
     "morgan": "^1.9.1",
     "node-fetch": "^1.7.3",
