@@ -30,7 +30,7 @@
     "express-session": "^1.15.6",
     "joi": "^13.7.0",
     "jsonwebtoken": "^8.5.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "mongoose": "^5.7.5",
     "mongoose-delete": "^0.4.0",
     "morgan": "^1.9.1",
