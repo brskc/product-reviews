@@ -35,7 +35,7 @@
     "mongoose-delete": "^0.4.0",
     "morgan": "^1.9.1",
     "node-fetch": "^1.7.3",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "request": "^2.83.0",
